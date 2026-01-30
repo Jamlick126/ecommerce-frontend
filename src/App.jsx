@@ -7,6 +7,8 @@ import Products from './components/Products';
 import ProductDetails from './pages/ProductDetails';
 import ProtectedRoute from './components/ProtectedRoute';
 import Cart from './components/Cart';
+import Contact from './pages/Contact';
+import ThankYou from './components/ThankYou';
 import Footer from './components/Footer';
 import './App.css'
 
@@ -21,10 +23,17 @@ function App() {
         <Route path="/product/:id" element={<ProductDetails />} />
         <Route path="/account" element={<Account />} />
         <Route path="/products" element={<Products />} />
+        <Route path="/contact" element={<Contact />} />
         <Route path="/cart" 
                 element={
                 <ProtectedRoute>
                   <Cart/>
+
+                </ProtectedRoute>}/>
+        <Route path="/thank-you" 
+                element={
+                <ProtectedRoute>
+                  <ThankYou />
                 </ProtectedRoute>}/>
       </Routes>
       <Footer/>

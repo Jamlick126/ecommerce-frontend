@@ -19,7 +19,7 @@ const Header = () => {
             setUsername(savedName);
             updateCartCount();
         }
-    }, [updateCartCount]);
+    }, []);
 
     const handleLogout = () => {
         localStorage.removeItem("token");

@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from './CartContext';
+
 
 const Cart = () => {
     // this will evevntually come from my database or global state
-    const [cartItems, setCartItems] = useState([]);
     const username = localStorage.getItem("username");
-    const { updateCartCount } = useCart();
+    const navigate = useNavigate();
+    const [cartItems, setCartItems] = useState([]);    
+    const { updateCartCount, setCartCount } = useCart();
     const [phone, setPhone] = useState("");
 
 
@@ -75,11 +77,20 @@ const Cart = () => {
         const response = await fetch('http://localhost:5000/api/stkpush', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ phone, amount: currentTotal })
+            body: JSON.stringify({ 
+                phone, 
+                amount: currentTotal,
+                username: username})
         });
         const data = await response.json();
+        
         if (data.ResponseCode === "0") {
             alert("Check your phone to enter M-Pesa PIN!");
+            setCartItems([]);
+            updateCartCount(0);
+            navigate("/thank-you");
+        } else {
+            alert("SOmething went wrong. Please try again.");
         }
     } catch (err) {
         console.error("M-Pesa Error:", err);

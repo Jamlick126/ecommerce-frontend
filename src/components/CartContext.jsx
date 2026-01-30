@@ -6,7 +6,12 @@ export const CartProvider = ( { children }) => {
     const [cartCount, setCartCount] = useState(0);
     const username = localStorage.getItem("username");
 
-    const updateCartCount = async () => {
+    const updateCartCount = async (manualCount = null) => {
+        if (manualCount !== null) {
+            setCartCount(manualCount);
+            return;
+        }
+
         const storedName = localStorage.getItem("username");
         if (!storedName) {
             setCartCount(0);
@@ -24,10 +29,10 @@ export const CartProvider = ( { children }) => {
     // fetch count on initial load
     useEffect(() => {
         updateCartCount();
-    }, [username]);
+    }, []);
 
     return (
-        <CartContext.Provider value={{ cartCount, updateCartCount }}>
+        <CartContext.Provider value={{ cartCount, updateCartCount, setCartCount }}>
             {children}
         </CartContext.Provider>
     )
