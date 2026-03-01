@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from './CartContext';
+import 'intasend-inlinejs-sdk';
 
 
 const Cart = () => {
@@ -63,6 +64,38 @@ const Cart = () => {
         } catch (err) {
             console.error("Error updating quantity:", err);
         }
+    };
+
+    // --- NEW: INTASEND IMPLEMENTATION ---
+    const handleIntaSendCheckout = () => {
+        const totalAmount = calculateTotal();
+        
+        // Initialize IntaSend
+        const intasend = new window.IntaSend({
+            publicAPIKey: "ISPubKey_test_4b424855-d2dc-4b8c-a5b0-297edf4ad78d", // Replace with your Public Key
+            live: false // Set to true for production
+        });
+
+        intasend.run({
+            amount: totalAmount,
+            currency: "KES",
+            email: "customer@email.com", // Ideally get this from user data
+            first_name: username,
+        })
+        .on("COMPLETE", (response) => {
+            console.log("Payment Successful:", response);
+            // Clear UI immediately
+            setCartItems([]);
+            updateCartCount(0);
+            navigate("/thank-you");
+        })
+        .on("FAILED", (response) => {
+            console.error("Payment Failed:", response);
+            alert("Payment failed. Please try again.");
+        })
+        .on("IN-PROGRESS", () => {
+            console.log("Payment in progress...");
+        });
     };
 
 
@@ -184,6 +217,20 @@ const Cart = () => {
                             Pay with M-Pesa
                         </button>
                     </div>
+                    
+                    <p style={{ color: '#fff'}}>- OR -</p>
+
+                    {/* Option 2: New IntaSend (Cards + M-Pesa) */}
+                    <div className="intasend-checkout">
+                        <button 
+                            className="btn" 
+                            onClick={handleIntaSendCheckout}
+                            style={{ background: '#5e35b1' }} // Different color for distinction
+                        >
+                            Pay with Card or M-Pesa (IntaSend)
+                        </button>
+                    </div>
+
                 </div>
                 </>
             )}
