@@ -81,6 +81,7 @@ const Cart = () => {
             currency: "KES",
             email: "customer@email.com", // Ideally get this from user data
             first_name: username,
+            api_ref: username,
         })
         .on("COMPLETE", (response) => {
             console.log("Payment Successful:", response);

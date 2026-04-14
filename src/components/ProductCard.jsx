@@ -5,7 +5,7 @@ const ProductCard = ({ product }) => {
     return (
         <div className="col-4">
             <Link to={`/product/${product.id}`}>
-            <img src={product.image_url} alt={product.name} />
+            <img src={window.location.origin + product.image_url} alt={product.name} />
             </Link>
 
             <h4>{product.name}</h4>
