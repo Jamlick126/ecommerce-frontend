@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 const Account = () => {
     // login or register
-    const [formType, setFormType] = useState('login');
+  const [formType, setFormType] = useState('login');
 
     // Translation values
   const loginTransform = formType === 'login' ? "translateX(300px)" : "translateX(0px)";
@@ -13,12 +13,9 @@ const Account = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-
   const hostname = window.location.hostname;
   const storeSlug = hostname.includes('.') && hostname.split('.').length>2 
     ? hostname.split('.')[0] : 'default-store';
-
-
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -27,7 +24,9 @@ const Account = () => {
     try {
         const response = await fetch('http://localhost:5000/api/register', {
             method:"POST",
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 
+                'Content-Type': 'application/json',
+                'x-store-slug': storeSlug },// Send the store slug in the headers
             body: JSON.stringify(userData),
         });
         const data = await response.json();
@@ -55,7 +54,7 @@ const Account = () => {
             method: "POST",
             headers: { 
                 'Content-Type': 'application/json',
-                'Store-Slug': storeSlug // Send the store slug in the headers
+                'x-store-slug': storeSlug // Send the store slug in the headers
             },
             body: JSON.stringify({email, password})
         });
