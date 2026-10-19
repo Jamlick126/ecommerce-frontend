@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
+import { apiFetch } from '../Api';
 
 const CartContext = createContext();
 
@@ -18,7 +19,7 @@ export const CartProvider = ( { children }) => {
             return;
         }
         try {
-            const res = await fetch(`http://localhost:5000/api/cart/count/${storedName}`);
+            const res = await apiFetch(`/api/cart/count/${storedName}`);
             const data = await res.json();
             setCartCount(data.count || 0);
         } catch (err) {

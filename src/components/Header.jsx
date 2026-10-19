@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, Link, useNavigate } from 'react-router-dom';
 import { useCart } from './CartContext';
+import { useStore } from './StoreContext';
 
 const Header = () => {
     // state to handle mobile menu visibility
@@ -10,6 +11,7 @@ const Header = () => {
     const [username, setUsername] = useState("");
     const { cartCount, updateCartCount } = useCart();
     const navigate = useNavigate();
+    const { storeConfig } = useStore();
 
     useEffect(() => {
         const savedName = localStorage.getItem("username");
@@ -47,7 +49,7 @@ const Header = () => {
             <div className="navbar-content">
                 <div className="logo">
                     <Link to="/" onClick={closeMenu}>
-                    <img src="/assets/logo-white.png" width="125px" alt="Store Logo" />
+                    <img src={storeConfig.logo_url} width="125px" alt={storeConfig.store_name} />
                     </Link>
                 </div>
                 <nav>

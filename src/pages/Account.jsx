@@ -14,6 +14,12 @@ const Account = () => {
   const [password, setPassword] = useState('');
 
 
+  const hostname = window.location.hostname;
+  const storeSlug = hostname.includes('.') && hostname.split('.').length>2 
+    ? hostname.split('.')[0] : 'default-store';
+
+
+
   const handleRegister = async (e) => {
     e.preventDefault();
 
@@ -32,11 +38,13 @@ const Account = () => {
         setUsername('');
         setEmail('');
         setPassword('');
+        setFormType('login'); // Switch to login form after successful registration
         } else {    
         alert(data.message || "Registration failed");
        }
     } catch (err) {
         console.error("Registration Error:", err);
+        alert("Network error during registration.");
     }
   };
 
@@ -45,7 +53,10 @@ const Account = () => {
     try {
         const response = await fetch('http://localhost:5000/api/login', {
             method: "POST",
-            headers: { 'Content-Type': 'application/json'},
+            headers: { 
+                'Content-Type': 'application/json',
+                'Store-Slug': storeSlug // Send the store slug in the headers
+            },
             body: JSON.stringify({email, password})
         });
         
@@ -59,10 +70,11 @@ const Account = () => {
             // option to redirect to home
             window.location.href="/products";
         } else {
-            alert(data.message);
+            alert(data.message || "Login failed. Please check your credentials.");
         }
     } catch (err) {
         console.error("Login error:", err);
+        alert("Network error during login.");
     }
   };
 

@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useCart } from '../components/CartContext';
 import ProductCard from '../components/ProductCard';
 import '../App.css';
+import { apiFetch } from '../Api';
 
 const ProductDetails = () => {
     const { id } = useParams(); // get id from the url
@@ -15,7 +16,7 @@ const ProductDetails = () => {
     const [mainImg, setMainImg] = useState("");
 
     useEffect(() => {
-        fetch(`http://localhost:5000/api/products/${id}`)
+        apiFetch(`/api/products/${id}`)
         .then(res => res.json())
         .then(data => {
             setProduct(data);
@@ -27,7 +28,7 @@ const ProductDetails = () => {
             setLoading(false);
         });
 
-        fetch('http://localhost:5000/api/products')
+        apiFetch('/api/products')
             .then(res => res.json())
             .then(data => {
                 const filtered = data
@@ -50,7 +51,7 @@ const ProductDetails = () => {
             return;
         }
         try {
-            const response = await fetch('http://localhost:5000/api/cart', {
+            const response = await apiFetch('/api/cart', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({

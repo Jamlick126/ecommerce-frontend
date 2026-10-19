@@ -3,6 +3,7 @@ import Hero from '../components/Hero';
 import ProductCard from '../components/ProductCard';
 import { Link } from 'react-router-dom';
 import '../App.css'
+import { apiFetch } from '../Api';
 
 
 const HomePage = () => {
@@ -10,7 +11,7 @@ const HomePage = () => {
     
     useEffect(() => {
         //Fetch products from my node.js server
-        fetch('http://localhost:5000/api/products')
+        apiFetch('/api/products')
         .then(response => response.json())
         .then(data =>{
                 const shuffled = data.sort(() => 0.5 - Math.random());

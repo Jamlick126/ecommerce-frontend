@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from './CartContext';
 import ProductCard from '../components/ProductCard';
+import { apiFetch } from '../Api';
 
 const Products = () => {
     const [products, setProducts] = useState([]);
@@ -9,7 +10,7 @@ const Products = () => {
     const { updateCartCount } = useCart();
 
     useEffect(() => {
-        fetch('http://localhost:5000/api/products')
+        apiFetch('/api/products')
         .then(res => res.json())
         .then(data => {
             setProducts(data);
@@ -27,7 +28,7 @@ const Products = () => {
         }
 
         try {
-            const response = await fetch('http://localhost:5000/api/cart', {
+            const response = await fetch('/api/cart', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({

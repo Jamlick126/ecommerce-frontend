@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from './CartContext';
 import 'intasend-inlinejs-sdk';
+import { apiFetch } from '../Api';
 
 
 const Cart = () => {
@@ -15,7 +16,7 @@ const Cart = () => {
 
     useEffect(() => {
         if (username) {
-            fetch(`http://localhost:5000/api/cart/user/${username}`)
+            apiFetch(`/api/cart/user/${username}`)
                 .then(res => res.json())
                 .then(data => setCartItems(data))
                 .catch(err => console.error("Error loading cart:", err));
@@ -28,7 +29,7 @@ const Cart = () => {
 
     const removeFromCart = async (id) => {
         try {
-            const response = await fetch(`http://localhost:5000/api/cart/${id}`, {
+            const response = await apiFetch(`/api/cart/${id}`, {
                 method: 'DELETE',
             });
             if (response.ok) {
@@ -43,7 +44,7 @@ const Cart = () => {
 
     const handleQuantityChange = async (id, change) => {
         try {
-            const response = await fetch(`http://localhost:5000/api/cart/update-quantity/${id}`, {
+            const response = await apiFetch(`/api/cart/update-quantity/${id}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json'},
                 body: JSON.stringify({ change })
@@ -108,7 +109,7 @@ const Cart = () => {
     }
 
     try {
-        const response = await fetch('http://localhost:5000/api/stkpush', {
+        const response = await apiFetch('/api/stkpush', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ 
