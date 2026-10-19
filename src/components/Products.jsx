@@ -28,7 +28,7 @@ const Products = () => {
         }
 
         try {
-            const response = await fetch('/api/cart', {
+            const response = await apiFetch('/api/cart', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
