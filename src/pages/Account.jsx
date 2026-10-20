@@ -79,7 +79,7 @@ const Account = () => {
 
   return (
     <div className="account-page">
-        <div className="conatiner">
+        <div className="container">
             <div className="row">
                 <div className="col-2">
                     <img src="/assets/image1.png" width="100%" alt="Featured" />

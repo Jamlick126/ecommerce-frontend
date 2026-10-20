@@ -1,11 +1,21 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  /* Dynamic Theme Variables (Defaults to RedStore theme) */
+  --primary-color: #ff523b;
+  --primary-hover: #563434;
+  --accent-gradient: radial-gradient(#fff, #d653b5);
+  --navbar-bg: #242424;
+  --text-main: #555;
+  --text-muted: #777;
+  --bg-color: #ffffff;
+  --font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+
+
+  font-family: var(--font-family, 'Roboto', sans-serif);
   line-height: 1.5;
   font-weight: 400;
-
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: var(--navbar-bg);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -30,6 +40,8 @@ body {
     padding: 0;
     width: 100%;
     overflow-x: hidden;
+    background-color: var(--bg-color);
+    font-family: var(--font-family);
 }
 
 .navbar {
@@ -39,8 +51,7 @@ body {
     padding: 0;
     z-index: 1000;
     min-height: 70px;
-
-    background-color: #242424;
+    background-color: var(--navbar-bg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 .navbar-content {
@@ -89,12 +100,12 @@ nav ul li a {
     text-decoration: none;
     text-transform: uppercase;
     letter-spacing: 1px;
-    color: #fcfcfc;
+    color: var(--text-main);
     transition: color 0.3s ease;
 }
 
 nav ul li a:hover {
-    color: #ff523b;
+    color: var(--primary-color);
 }
 
 .header-icons, .cart-icon-container {
@@ -107,28 +118,28 @@ nav ul li a:hover {
 }
 
 p {
-    color: #555;
+    color: var(--text-main);
     font-weight: 500;
 }
 
 .nav-user {
     cursor: pointer;
-    color: #555;
+    color: var(--text-main);
     font-weight: 500;
     font-size: 14px;
     margin-left: 15px;
-    background: rgba(255, 82, 59, 0.1); /* Subtle pill background */
+    background: color-mix(in srgb, var(--primary-color) 10%, transparent); /* Subtle pill background */
     padding: 5px 10px;
     border-radius: 20px;
 
 }
 
 .nav-user:hover {
-    color: #ff523b;
+    color: var(--primary-color);
 }
 
 .header {
-    background: radial-gradient(#fff,#d653b5);
+    background: var(--accent-gradient);
     padding-top: 50px;
 }
 
@@ -178,7 +189,7 @@ p {
 
 .view-more-container .btn {
     display: inline-block;
-    background: #ff523b;
+    background: var(--primary-color);
     color: #fff;
     padding: 8px 30px;
     border-radius: 30px;
@@ -186,7 +197,7 @@ p {
 }
 
 .view-more-container .btn:hover {
-    background: #563434; /* Darker shade on hover */
+    background: var(--primary-hover); /* Darker shade on hover */
 }
 
 /* Container to keep the badge attached to the icon */
@@ -206,7 +217,7 @@ p {
     position: absolute;
     top: -8px;
     right: -10px;
-    background-color: #ff523b;
+    background-color: var(--primary-color);
     color: white;
     border-radius: 50%;
     padding: 2px 6px;
@@ -223,7 +234,7 @@ p {
 }
 
 .qty-btn {
-    background: #ff523b;
+    background: var(--primary-color);
     color: white;
     border: none;
     width: 25px;
@@ -234,7 +245,7 @@ p {
 }
 
 .qty-btn:hover {
-    background: #563434;
+    background: var(--primary-hover);
 }
 
 .qty-number {
@@ -245,7 +256,7 @@ p {
 
 .btn {
     display: inline-block;
-    background: #ff523b;
+    background: var(--primary-color);
     text-decoration: none;
     color: #fff;
     padding: 8px 30px;
@@ -255,15 +266,7 @@ p {
 }
 
 .btn:hover {
-    background: #563434;
-}
-
-.header {
-    background: radial-gradient(#fff,#d653b5);
-}
-
-.header .row {
-    margin-top: 70px;
+    background: var(--primary-hover);
 }
 
 .categories {
@@ -296,7 +299,10 @@ p {
 }
 
 .col-4 img {
-    width: 100px;
+    width: 100%;
+    height: 180px;
+    object-fit: contain;
+    margin-bottom: 15px;
 }
 
 .title {
@@ -304,12 +310,12 @@ p {
     margin: 0 auto 70px;
     position: relative;
     line-height: 50px;
-    color: #555;
+    color: var(--text-main);
 }
 
 .title::after {
     content: '';
-    background: #ff523b;
+    background: var(--primary-color);
     width: 70px;
     height: 5px;
     border-radius: 5px;
@@ -320,7 +326,7 @@ p {
 }
 
 h4 {
-    color: #555;
+    color: var(--text-main);
     font-weight: normal;
 }
 
@@ -329,7 +335,7 @@ h4 {
 }
 
 .rating .fa{
-    color: #ff523b;
+    color: var(--primary-color);
 }
 
 .col-4:hover {
@@ -337,7 +343,7 @@ h4 {
 }
 
 .offer {
-    background: radial-gradient(#fff,#d653b5);
+    background: var(--accent-gradient);
     margin-top: 70px;
     padding: 30px 0;
 }
@@ -347,23 +353,23 @@ h4 {
 } 
 
 small {
-    color: #555;
+    color: var(--text-main);
 }
 
 .fa.fa-quote-left {
     font-size: 34px;
-    color: #ff523b;
+    color: var(--primary-color);
 }
 
 .col-3 p {
     font-size: 14px;
     margin: 12px 0;
-    color: #777;
+    color: var(--text-muted);
 }
 
 .testimonial .col-3 h3 {
     font-weight: 600;
-    color: #555;
+    color: var(--text-main);
     font-size: 16px;
 }
 
@@ -388,7 +394,7 @@ small {
 /* Ensure the button looks great on the cart page */
 .total-price + div .btn {
     display: inline-block;
-    background: #ff523b;
+    background: var(--primary-color);
     color: #fff;
     padding: 10px 30px;
     margin: 30px 0;
@@ -399,7 +405,7 @@ small {
 }
 
 .total-price + div .btn:hover {
-    background: #563434;
+    background: var(--primary-hover);
 }
 
 /* Footer */
@@ -408,7 +414,7 @@ small {
     color: #8a8a8a;
     font-size: 14px;
     padding: 60px 0 20px;
-    margin-top: 32px;
+    margin-top: 0;
 }
 
 .footer p {
@@ -483,13 +489,14 @@ ul {
 }
 
 select {
-    border: 1px solid #ff523b;
-    padding: 5px;
+    background-color: #ffffff !important;
+    color: #333333 !important;
+    border: 1px solid #333333;
+    border-radius: 6px;
+    padding: 10px;
+    font-family: var(--font-family);
 }
 
-select:focus {
-    outline: none;
-}
 
 .page-btn {
     margin: 0 auto 70px;
@@ -497,7 +504,7 @@ select:focus {
 
 .page-btn span {
     display: inline-block;
-    border: 1px solid #ff523b;
+    border: 1px solid var(--primary-color);
     margin-left: 10px;
     width: 40px;
     height: 40px;
@@ -507,7 +514,7 @@ select:focus {
 }
 
 .page-btn span:hover {
-    background: #ff523b;
+    background: var(--primary-color);
     color: #fff;
 }
 
@@ -541,15 +548,17 @@ select:focus {
     padding-left: 10px;
     font-size: 20px;
     margin-right: 10px;
-    border: 1px solid #ff523b;
+    border: 1px solid var(--primary-color);
 }
 
-input:focus {
+input:focus, select:focus {
+    border-color: var(--primary-color) !important;
     outline: none;
+    box-shadow: 0 0 5px rgba(255, 82, 59, 0.2);
 }
 
 .single-product .fa {
-    color: #ff523b;
+    color: var(--primary-color);
     margin-left: 10px;
 }
 
@@ -582,7 +591,7 @@ th {
     text-align: left;
     padding: 5px;
     color: #fff;
-    background: #ff523b;
+    background: var(--primary-color);
     font-weight: normal;
 }
 
@@ -597,7 +606,7 @@ td input {
 }
 
 td a {
-    color: #ff523b;
+    color: var(--primary-color);
     font-size: 12px;
 }
 
@@ -613,7 +622,7 @@ td img {
 }
 
 .total-price table {
-    border-top: 3px solid #ff523b;
+    border-top: 3px solid var(--primary-color);
     width: 100%;
     max-width: 365px;
 }
@@ -630,7 +639,7 @@ th:last-child {
 
 .account-page {
     padding: 50px 0px;
-    background: radial-gradient(#fff,#d653b5); 
+    background: var(--accent-gradient); 
 }
 
 .form-container {
@@ -648,7 +657,7 @@ th:last-child {
 .form-container span {
     font-weight: bold;
     padding: 0 10px;
-    color: #555;
+    color: var(--text-main);
     cursor: pointer;
     width: 100px;
     display: inline-block;
@@ -701,7 +710,7 @@ form a {
 #Indicator {
     width: 100px;
     border: none;
-    background: #ff523b;
+    background: var(--primary-color);
     height: 3px;
     margin-top: 8px;
     transform: translateX(100px);
