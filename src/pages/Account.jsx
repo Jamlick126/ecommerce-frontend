@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {apiFetch} from '../Api';
 
 const Account = () => {
     // login or register
@@ -22,7 +23,7 @@ const Account = () => {
 
     const userData = { username, email, password };
     try {
-        const response = await fetch('http://localhost:5000/api/register', {
+        const response = await apiFetch('/api/register', {
             method:"POST",
             headers: { 
                 'Content-Type': 'application/json',
@@ -50,7 +51,7 @@ const Account = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-        const response = await fetch('http://localhost:5000/api/login', {
+        const response = await apiFetch('/api/login', {
             method: "POST",
             headers: { 
                 'Content-Type': 'application/json',
