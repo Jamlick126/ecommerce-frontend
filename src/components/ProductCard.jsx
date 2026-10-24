@@ -2,10 +2,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const ProductCard = ({ product }) => {
+
+    const imagePath = product.image_url?.startsWith('/')
+        ? product.image_url
+        : `/${product.image_url}`;
     return (
         <div className="col-4">
             <Link to={`/product/${product.id}`}>
-            <img src={window.location.origin + product.image_url} alt={product.name} />
+            <img src={imagePath} alt={product.name} />
             </Link>
 
             <h4>{product.name}</h4>
