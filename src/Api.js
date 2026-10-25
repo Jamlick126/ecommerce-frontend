@@ -2,9 +2,11 @@ const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://ecommerce-backend-
 
 export const apiFetch = async (endpoint, options = {}) => {
     const hostname = window.location.hostname;
-    const storeSlug = hostname.includes('.') && hostname.split('.').length > 2 
-        ? hostname.split('.')[0] 
-        : 'default-store';
+
+    let storeSlug = 'default-store';
+    if (hostname.includes('.') && hostname.split('.').length > 2) {
+        storeSlug = hostname.split('.')[0];
+    }
 
     const headers = {
         ...options.headers,
