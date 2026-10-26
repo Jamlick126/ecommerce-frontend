@@ -15,12 +15,19 @@ const ProductDetails = () => {
      // state to manage the main gallery
     const [mainImg, setMainImg] = useState("");
 
+    // Helper to ensure image paths always start with a slash for correct root resolution
+    const getImageUrl = (url) => {
+        if (!url) return '';
+        return url.startsWith('/') ? url : `/${url}`;
+    };
+
     useEffect(() => {
         apiFetch(`/api/products/${id}`)
         .then(res => res.json())
         .then(data => {
             setProduct(data);
-            setMainImg(data.image_url || (data.images && data.images[0]));
+            const initialImg = data.image_url || (data.images && data.images[0]);
+            setMainImg(getImageUrl(initialImg));
             setLoading(false);
         })
         .catch(err => {
@@ -80,12 +87,20 @@ const ProductDetails = () => {
 
                     {product.images && product.images.length > 0 && (
                         <div className="samll-img-row">
-                        {product.images.map((img, index) => (
-                            <div className="small-img-col" key={index}>
-                                <img src={img} alt={`Gallery ${index}`} width="100%" className="small-img" onClick={() => setMainImg(img)} />
-
-                            </div>
-                        ))}
+                        {product.images.map((img, index) => {
+                            const formattedImg = getImageUrl(img);
+                            return (
+                                <div className="small-img-col" key={index}>
+                                    <img 
+                                        src={formattedImg} 
+                                        alt={`Gallery ${index}`} 
+                                        width="100%" 
+                                        className="small-img" 
+                                        onClick={() => setMainImg(formattedImg)} 
+                                    />
+                                </div>
+                            );
+                        })}
                     </div>
                     )}            
                 </div>
