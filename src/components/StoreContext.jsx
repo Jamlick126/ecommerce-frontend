@@ -1,6 +1,9 @@
-import React, { createContext,useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 
 const StoreContext = createContext();
+
+// Use environment variable or fallback to Render backend URL
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://ecommerce-backend-hm0b.onrender.com';
 
 export const StoreProvider = ({ children }) => {
     const [storeConfig, setStoreConfig] = useState({
@@ -20,7 +23,7 @@ export const StoreProvider = ({ children }) => {
     ? hostname.split('.')[0] : 'default-store';
 
     useEffect(() => {
-        fetch(`http://localhost:5000/api/store-config/${storeSlug}`)
+        fetch(`${API_BASE_URL}/api/store-config/${storeSlug}`)
         .then(res => res.json())
         .then(data => {
             if (data && !data.message) {

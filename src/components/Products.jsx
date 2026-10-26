@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from './CartContext';
-import ProductCard from '../components/ProductCard';
 import { apiFetch } from '../Api';
 
 const Products = () => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const { updateCartCount } = useCart();
+
+    // Helper to ensure image paths always start with a slash
+    const getImageUrl = (url) => {
+        if (!url) return '';
+        return url.startsWith('/') ? url : `/${url}`;
+    };
 
     useEffect(() => {
         apiFetch('/api/products')
@@ -18,6 +23,7 @@ const Products = () => {
         })
         .catch(err => console.error("Error fetching products:", err))
     }, []);
+
 
     const addToCart = async (productId) => {
         const token = localStorage.getItem("token");
@@ -55,7 +61,7 @@ const Products = () => {
                 {products.map(product => (
                     <div key={product.id} className="col-4">
                         <Link to={`/product/${product.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-                            <img src={product.image_url} alt={product.name} />
+                            <img src={getImageUrl(product.image_url)} alt={product.name} />
                             <h4>{product.name}</h4>
                         </Link>
 
