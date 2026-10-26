@@ -1,13 +1,14 @@
-import React, { createContext, useState, useEffect, useContext } from 'react';
+import React, { createContext, useState, useEffect, useContext, useCallback } from 'react';
 import { apiFetch } from '../Api';
 
 const CartContext = createContext();
 
 export const CartProvider = ( { children }) => {
     const [cartCount, setCartCount] = useState(0);
+
     const username = localStorage.getItem("username");
 
-    const updateCartCount = async (manualCount = null) => {
+    const updateCartCount = useCallback(async (manualCount = null) => {
         if (manualCount !== null) {
             setCartCount(manualCount);
             return;
@@ -20,17 +21,28 @@ export const CartProvider = ( { children }) => {
         }
         try {
             const res = await apiFetch(`/api/cart/count/${storedName}`);
-            const data = await res.json();
-            setCartCount(data.count || 0);
+            if(res.ok) {
+                const data = await res.json();
+                setCartCount(data.count || 0);
+            } else {
+                setCartCount(0);
+            }
         } catch (err) {
             console.error("Error updating count:", err);
+            setCartCount(0);
         }
-    };
+    }, []);
 
     // fetch count on initial load
     useEffect(() => {
         updateCartCount();
-    }, []);
+
+        // Sync cart count across browser tabs or on auth state changes
+        const handleStorageChange = () => updateCartCount();
+        window.addEventListener('storage', handleStorageChange);
+
+        return () => window.removeEventListener('storage', handleStorageChange);
+    }, [updateCartCount]);
 
     return (
         <CartContext.Provider value={{ cartCount, updateCartCount, setCartCount }}>

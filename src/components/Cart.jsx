@@ -10,9 +10,14 @@ const Cart = () => {
     const username = localStorage.getItem("username");
     const navigate = useNavigate();
     const [cartItems, setCartItems] = useState([]);    
-    const { updateCartCount, setCartCount } = useCart();
+    const { updateCartCount } = useCart();
     const [phone, setPhone] = useState("");
 
+    // Helper to ensure image paths always start with a slash
+    const getImageUrl = (url) => {
+        if (!url) return '';
+        return url.startsWith('/') ? url : `/${url}`;
+    };
 
     useEffect(() => {
         if (username) {
@@ -103,34 +108,33 @@ const Cart = () => {
 
     const handleMpesa = async () => {
         const currentTotal = cartItems.reduce((acc, item) => acc + (item.price * item.quantity), 0);
-    if (!phone.startsWith("254") || phone.length !== 12) {
-        alert("Please enter phone in format 2547XXXXXXXX");
-        return;
-    }
-
-    try {
-        const response = await apiFetch('/api/stkpush', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ 
-                phone, 
-                amount: currentTotal,
-                username: username})
-        });
-        const data = await response.json();
-        
-        if (data.ResponseCode === "0") {
-            alert("Check your phone to enter M-Pesa PIN!");
-            setCartItems([]);
-            updateCartCount(0);
-            navigate("/thank-you");
-        } else {
-            alert("SOmething went wrong. Please try again.");
+        if (!phone.startsWith("254") || phone.length !== 12) {
+            alert("Please enter phone in format 2547XXXXXXXX");
+            return;
         }
-    } catch (err) {
-        console.error("M-Pesa Error:", err);
-    }
-};
+        try {
+            const response = await apiFetch('/api/stkpush', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ 
+                    phone, 
+                    amount: currentTotal,
+                    username: username})
+            });
+            const data = await response.json();
+            
+            if (data.ResponseCode === "0") {
+                alert("Check your phone to enter M-Pesa PIN!");
+                setCartItems([]);
+                updateCartCount(0);
+                navigate("/thank-you");
+            } else {
+                alert("Something went wrong. Please try again.");
+            }
+        } catch (err) {
+            console.error("M-Pesa Error:", err);
+        }
+    };
 
     return (
         <div className="small-container cart-page">
@@ -156,10 +160,10 @@ const Cart = () => {
                             <tr key={item.id}>
                                 <td>
                                     <div className="cart-info">
-                                    <img src={item.image_url} alt={item.name}  width="50px"/>
+                                    <img src={getImageUrl(item.image_url)} alt={item.name}  width="50px"/>
                                     <div>
                                         <p>{item.name}</p>
-                                        <small>Price: Ksh.{item.price}</small>
+                                        <small>Price: Ksh.{item.price.toLocaleString()}</small>
                                         <br/>
                                         <a href="#" onClick={(e) => {
                                             e.preventDefault();
@@ -187,7 +191,7 @@ const Cart = () => {
                         <tbody>
                              <tr>
                             <td>Total</td>
-                            <td>Ksh.{calculateTotal()}</td>
+                            <td>Ksh.{calculateTotal().toLocaleString()}</td>
                         </tr>
 
                         </tbody>
