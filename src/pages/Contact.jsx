@@ -18,13 +18,14 @@ const Contact = () => {
         <div className="small-container contact-page" style={{ padding: '50px 0' }}>
             <div className="row contact-top-row" style={{ alignItems: 'stretch', marginBottom: '50px'}}>
                 {/* Contact Image */}
-                <div className="col-2" style={{ display: 'flex'}}>
+                <div className="col-2" style={{ display: 'flex', flexDirection: 'column'}}>
                     <div style={{
                         width: '100%',
+                        flex: '1',
                         borderRadius: '10px',
                         overflow:'hidden',
                         boxShadow: '0 4px 15px rgba(0, 0, 0, 0.3)',
-                        minHeight: '400px'
+                        display: 'flex',
                     }}>
                         <img 
                             src="/assets/contact.jpg" 
