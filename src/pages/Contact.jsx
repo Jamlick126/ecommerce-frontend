@@ -36,7 +36,13 @@ const Contact = () => {
                 </div>
                 {/*Form and information */}
                 <div className="col-2">
-                    <div className="form-container" style={{ textAlign: 'left', background: '#2c2c2c', padding: '30px', borderRadius: '10px' }}>
+                    <div className="form-container" style={{ 
+                            textAlign: 'left', 
+                            background: '#2c2c2c', 
+                            padding: '30px', 
+                            borderRadius: '10px',
+                            boxShadow: '0 4px 15px rgba(0, 0, 0, 0.3)'
+                        }}>
                         <h2 style={{ color: '#fff', marginBottom: '20px' }}>Get in Touch</h2>
                         <form onSubmit={handleSubmit}>
                             <input 
@@ -74,13 +80,19 @@ const Contact = () => {
                             
                             <button type="submit" className="btn">Send Message</button>
                         </form>
+
+                        {/* Divider Line & Contact Info inside the Dark Container */}
+                        <hr style={{ border: 'none', height: '1px', background: '#444', margin: '25px 0' }} />
+                        
+                        <div className="contact-info" style={{ color: '#ccc', paddingLeft: '5px' }}>
+                            <p style={{ marginBottom: '8px', color: '#ccc'}} >📍 123 Business Bay, Maralal, Kenya</p>
+                            <p style={{ marginBottom: '8px', color: '#ccc'}} >📞 +254 796 755 881</p>
+                            <p style={{ color: '#ccc'}} >✉️ support@redstore.com</p>
+                        </div>
+
                     </div>
 
-                    <div className="contact-info" style={{ color: '#ccc', paddingLeft: '10px', marginTop: '30px', color: '#ccc' }}>
-                        <p>📍 123 Business Bay, Maralal, Kenya</p>
-                        <p>📞 +254 796 755 881</p>
-                        <p>✉️ support@redstore.com</p>
-                    </div>
+                    
                 </div>
 
                 </div>

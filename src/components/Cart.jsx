@@ -107,7 +107,7 @@ const Cart = () => {
 
 
     const handleMpesa = async () => {
-        const currentTotal = cartItems.reduce((acc, item) => acc + (item.price * item.quantity), 0);
+        const currentTotal = calculateTotal();
         if (!phone.startsWith("254") || phone.length !== 12) {
             alert("Please enter phone in format 2547XXXXXXXX");
             return;
@@ -140,35 +140,43 @@ const Cart = () => {
         <div className="small-container cart-page">
             <h2>Your Shopping Cart</h2>
             {cartItems.length === 0 ? (
-                <div className="empty-cart">
-                    <p>Your cart is currently empty.</p>
+                <div className="empty-cart" style={{ textAlign: 'center', padding: '50px 0' }}>
+                    <p style={{ fontSize: '18px', marginBottom: '20px', color: '#555' }}>Your cart is currently empty.</p>
                     <Link to="/products" className="btn">Shop Now</Link>
                 </div>
             ): (
                 <>
-                <table>
+                <div style={{ overflowX: 'auto', background: '#fff', borderRadius: '8px', boxShadow: '0 2px 10px rgba(0,0,0,0.05)' }}>
+                    <table>
                     <thead>
                         <tr>
                             <th>Product</th>
                             <th>Quantity</th>
-                            <th>Subtotal</th>
+                            <th style={{ textAlign: 'right' }} >Subtotal</th>
                         </tr>
                     </thead>
                     <tbody>
                         {/* Map cart items here*/}
                         {cartItems.map(item => (
-                            <tr key={item.id}>
+                            <tr key={item.id} style={{ borderBottom: '1px solid #eee' }}>
                                 <td>
-                                    <div className="cart-info">
-                                    <img src={getImageUrl(item.image_url)} alt={item.name}  width="50px"/>
+                                    <div className="cart-info" style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+                                    <img 
+                                        src={getImageUrl(item.image_url)} 
+                                        alt={item.name} 
+                                        style={{ width: '70px', height: '70px', objectFit: 'contain', background: '#f9f9f9', borderRadius: '6px', padding: '5px' }} 
+                                    />
                                     <div>
                                         <p>{item.name}</p>
                                         <small>Price: Ksh.{item.price.toLocaleString()}</small>
                                         <br/>
-                                        <a href="#" onClick={(e) => {
-                                            e.preventDefault();
-                                            removeFromCart(item.id);
-                                        }} style={{color: '#ff523b', fontSize:'12px'}}>Remove</a>
+                                        <button 
+                                            onClick={() => removeFromCart(item.id)} 
+                                            style={{ background: 'none', border: 'none', color: '#ff523b', cursor: 'pointer', fontSize: '12px', padding: '0', marginTop: '4px', fontWeight: '600' }}
+                                        >
+                                            Remove
+                                        </button>   
+               
                                     </div>
                                     </div>
                                 </td>
@@ -181,11 +189,13 @@ const Cart = () => {
                                             onClick={() => handleQuantityChange(item.id, 1)} className="qty-btn">+</button>
                                     </div>
                                 </td>
-                                <td>Ksh.{(item.price * item.quantity).toLocaleString()}</td> 
+                                <td style={{ textAlign: 'right' }}>Ksh.{(item.price * item.quantity).toLocaleString()}</td> 
                             </tr>
                         ))}
                     </tbody>
-                </table>
+                    </table>
+                </div>
+                
                 <div className="total-price">
                     <table>
                         <tbody>
@@ -200,7 +210,7 @@ const Cart = () => {
                 </div>
 
                 {/* Add the Checkout Button here */}
-                <div className="mpesa-checkout-container" style={{ textAlign: 'right', marginTop: '30px' }}>
+                <div className="mpesa-checkout-card" style={{ textAlign: 'right', marginTop: '30px' }}>
                     <p style={{ marginBottom: '10px', fontSize: '14px', color: '#ffffff' }}>
                         Ready to order? Enter M-Pesa number:
                     </p>
@@ -219,19 +229,19 @@ const Cart = () => {
                             }}
                         />
                         {/* This button now handles the logic previously intended for 'Proceed' */}
-                        <button className="btn" onClick={handleMpesa}>
+                        <button className="btn" onClick={handleMpesa} style={{ margin: '0', padding: '10px 25px' }}>
                             Pay with M-Pesa
                         </button>
                     </div>
                     
-                    <p style={{ color: '#fff'}}>- OR -</p>
+                    <p style={{ margin: '20px 0 15px', color: '#888', fontSize: '13px' }}>- OR -</p>
 
                     {/* Option 2: New IntaSend (Cards + M-Pesa) */}
                     <div className="intasend-checkout">
                         <button 
                             className="btn" 
                             onClick={handleIntaSendCheckout}
-                            style={{ background: '#5e35b1' }} // Different color for distinction
+                            style={{ background: '#5e35b1',margin: '0', width: '100%', padding: '10px' }} // Different color for distinction
                         >
                             Pay with Card or M-Pesa (IntaSend)
                         </button>
