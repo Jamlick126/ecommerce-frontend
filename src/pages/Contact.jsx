@@ -16,43 +16,71 @@ const Contact = () => {
 
     return (
         <div className="small-container contact-page" style={{ padding: '50px 0' }}>
-            <div className="row">
+            <div className="row" style={{ alignItems: 'flex-start', marginBottom: '50px'}}>
+                {/* Contact Image */}
                 <div className="col-2">
                     <img src="/assets/contact.jpg" width="100%" alt="Contact Us" 
                          onError={(e) => e.target.src = "https://via.placeholder.com/500x400?text=Contact+Us"} />
                 </div>
+                {/*Form and information */}
                 <div className="col-2">
                     <div className="form-container" style={{ textAlign: 'left', background: '#2c2c2c', padding: '30px', borderRadius: '10px' }}>
                         <h2 style={{ color: '#fff', marginBottom: '20px' }}>Get in Touch</h2>
                         <form onSubmit={handleSubmit}>
-                            <input type="text" placeholder="Your Name" required 
+                            <input 
+                                type="text" 
+                                placeholder="Your Name" 
+                                required 
                                 value={formData.name}
                                 onChange={(e) => setFormData({...formData, name: e.target.value})}
                                 style={inputStyle} />
                             
-                            <input type="email" placeholder="Email Address" required 
+                            <input 
+                                type="email" 
+                                placeholder="Email Address" 
+                                required 
                                 value={formData.email}
                                 onChange={(e) => setFormData({...formData, email: e.target.value})}
                                 style={inputStyle} />
                             
-                            <input type="text" placeholder="Subject" required 
+                            <input 
+                                type="text" 
+                                placeholder="Subject" 
+                                required 
                                 value={formData.subject}
                                 onChange={(e) => setFormData({...formData, subject: e.target.value})}
                                 style={inputStyle} />
                             
-                            <textarea placeholder="Your Message" rows="5" required
+                            <textarea 
+                                placeholder="Your Message" 
+                                rows="5" 
+                                required
                                 value={formData.message}
                                 onChange={(e) => setFormData({...formData, message: e.target.value})}
-                                style={{ ...inputStyle, resize: 'none' }}></textarea>
+                                style={{ ...inputStyle, resize: 'none' }}>
+                            </textarea>
                             
                             <button type="submit" className="btn">Send Message</button>
                         </form>
                     </div>
 
-                    <div className="contact-info" style={{ marginTop: '30px', color: '#ccc' }}>
+                    <div className="contact-info" style={{ color: '#ccc', paddingLeft: '10px', marginTop: '30px', color: '#ccc' }}>
                         <p>📍 123 Business Bay, Maralal, Kenya</p>
                         <p>📞 +254 713 266 364</p>
                         <p>✉️ support@redstore.com</p>
+                    </div>
+                </div>
+                {/* Right Column: Google Maps Location */}
+                <div className="mapp-full-container" style={{ width: '100%'}}>
+                    <h3 style={{ color: 'var(--text-main, #333)', marginBottom: '15px', textAlign: 'center' }}>Our Location</h3>
+                    <div className="map-container" style={{ width: '100%', height: '400px', borderRadius: '10px', overflow: 'hidden', boxShadow: '0 4px 10px rgba(0, 0, 0, 0.2)' }}>
+                        <iframe 
+                            title="Store Location"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15955.08747427181!2d36.690833!3d1.096667!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x17855b768a4ab0f7%3A0x6b77227e0bc2784d!2sMaralal!5e0!3m2!1sen!2ske!4v1700000000000!5m2!1sen!2ske"
+                            allowFullScreen="" 
+                            loading="lazy" 
+                            referrerPolicy="no-referrer-when-downgrade"
+                        ></iframe>
                     </div>
                 </div>
             </div>
@@ -67,7 +95,8 @@ const inputStyle = {
     border: '1px solid #444',
     background: '#1a1a1a',
     color: '#fff',
-    borderRadius: '5px'
+    borderRadius: '5px',
+    cursor: 'pointer'
 };
 
 export default Contact;

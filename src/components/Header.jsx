@@ -60,10 +60,14 @@ const Header = () => {
                         {/* Dynamic Link: Show Logout if logged in, else show Account */}
                         {isLoggedIn ? (
                             <>
-                                <li style={{cursor: 'pointer'}} onClick={handleLogout}>Logout ({username})</li>
+                                <li>
+                                    <button className="nav-logout-btn" onClick={handleLogout}>
+                                        Logout ({username})
+                                    </button>
+                                   </li>
                             </>
                         ) : (
-                            <li><NavLink to="/account" onClick={closeMenu}>Account</NavLink></li>
+                            <li><NavLink to="/account" className={navLinkStyles} onClick={closeMenu}>Account</NavLink></li>
                         )}
                         
                     </ul>
