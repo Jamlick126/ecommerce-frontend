@@ -6,27 +6,26 @@ import { useStore } from './StoreContext';
 const Header = () => {
     // state to handle mobile menu visibility
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    //state to store logged-in user info
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [username, setUsername] = useState("");
     const { cartCount, updateCartCount } = useCart();
     const navigate = useNavigate();
     const { storeConfig } = useStore();
 
+    //state to store logged-in user info
+    const username = localStorage.getItem("username") || "";
+    const token = localStorage.getItem("token");
+    const isLoggedIn = Boolean(token);
+
     useEffect(() => {
-        const savedName = localStorage.getItem("username");
-        const token = localStorage.getItem("token");
-        if (token) {
-            setIsLoggedIn(true);
-            setUsername(savedName);
+        
+        if (isLoggedIn) {
             updateCartCount();
         }
-    }, []);
+    }, [isLoggedIn, updateCartCount]);
 
     const handleLogout = () => {
         localStorage.removeItem("token");
         localStorage.removeItem("username");
-        setIsLoggedIn(false);
+        updateCartCount(); // Reset cart count on logout
         navigate("/account");
     }
 
