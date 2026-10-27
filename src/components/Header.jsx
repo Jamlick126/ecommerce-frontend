@@ -27,7 +27,7 @@ const Header = () => {
         localStorage.removeItem("token");
         localStorage.removeItem("username");
         setIsLoggedIn(false);
-        window.location.href = "/account";
+        navigate("/account");
     }
 
     const toggleMenu = () => {

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {apiFetch} from '../Api';
+
 
 const Account = () => {
     // login or register
@@ -13,6 +15,7 @@ const Account = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   const hostname = window.location.hostname;
   const storeSlug = hostname.includes('.') && hostname.split('.').length>2 
@@ -61,6 +64,8 @@ const Account = () => {
         });
         
         const data = await response.json();
+
+
         if (response.ok) {
             // saving token and username to localStorage
             localStorage.setItem("token", data.token);
@@ -68,7 +73,7 @@ const Account = () => {
 
             alert("Welcome back, " + data.user.username);
             // option to redirect to home
-            window.location.href="/products";
+            navigate("/products");
         } else {
             alert(data.message || "Login failed. Please check your credentials.");
         }
