@@ -837,41 +837,64 @@ select,
     border: 0;
 }
 
-@media only screen and (max-width: 600px) {
-    .row {
-        text-align: center;
+/* --- Large Desktops & Ultrawide Screens (1200px and up) --- */
+@media only screen and (min-width: 1200px) {
+    .container {
+        max-width: 1200px;
     }
-    .col-2, .col-3, .col-4 {
-        flex-basis: 100%;
-    }
-    .single-product .row {
-        text-align: left;
-    }
-    .single-product .col-2 {
-        padding: 20px 0;
-    }
-    .single-product h2 {
-        font-size: 26px;
-        line-height: 32px;
-    }
-    .contact-page .col-2 {
-        flex-basis: 100%;
-        margin-bottom: 30px;
-    }
-    .cart-info p {
-        display: flex;
-        flex-wrap: wrap;
+    
+    .small-container {
+        max-width: 1000px;
     }
 }
 
-@media only screen and (max-width: 700px) {
+@media only screen and (max-width: 800px) {
+    .container, .small-container {
+        padding-left: 15px;
+        padding-right: 15px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
+    .row {
+        flex-direction: column;
+        width: 100%;
+    }
 
-    nav ul{
+    .col-2 {
+        flex-basis: 100%;
+        width: 100%;
+        min-width: 100%;
+    }
+
+    /* Fix form and element stretching inside mobile viewports */
+    .contact-page .form-container,
+    .form-container {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box;
+    }
+
+    /* Ensure account page form wrapper scales cleanly */
+    .account-page .form-container {
+        height: auto;
+        min-height: 400px;
+        padding-bottom: 30px;
+    }
+
+    .account-page .form-container form {
+        width: 100% !important;
+        left: 0 !important;
+        padding: 0 15px;
+    }
+
+    /* Mobile Navigation Dropdown Menu Styling */
+    nav ul {
         position: absolute;
         top: 70px;
         right: 0;
         background: #333;
-        width: 160px;
+        width: 180px;
         overflow: hidden;
         transition: max-height 0.5s ease-in-out;
         box-shadow: 0 5px 15px rgba(0,0,0,0.4);
@@ -879,31 +902,81 @@ select,
         display: flex;
         flex-direction: column;
     }
+    
     nav ul li {
         text-align: left;
         display: block;
-        
-        
     }
+    
     nav ul li a {
         color: #fff;
         display: block;
-        padding: 2px 10px;
+        padding: 10px 15px;
         text-decoration: none;
         font-size: 14px;
         transition: background 0.3s ease;
     }
+
     .menu-icon {
         display: block;
         cursor: pointer;
     }
+
     .menu-overlay {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background: transparent; /* Or rgba(0,0,0,0.1) to dim the background */
-        z-index: 1; /* Sits behind the menu (z-index 2) but above the content */
+        background: transparent;
+        z-index: 1;
+    }
+}
+
+/* --- Small Mobile Phones (480px and below) --- */
+@media only screen and (max-width: 480px) {
+    .col-2 h1 {
+        font-size: 36px;
+        line-height: 40px;
+        margin: 15px 0;
+    }
+
+    h2 {
+        font-size: 24px;
+    }
+
+    /* Tighten container padding for narrow screens */
+    .container, .small-container {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    /* Prevent buttons and checkout inputs from clipping */
+    .btn {
+        padding: 10px 20px;
+        font-size: 14px;
+        width: 100%;
+        text-align: center;
+        margin: 15px 0;
+    }
+
+    .mpesa-checkout-card {
+        padding: 20px 15px;
+    }
+
+    /* Stack M-Pesa input and payment button vertically on tiny screens */
+    .mpesa-checkout-card div {
+        flex-direction: column;
+        align-items: stretch !important;
+        gap: 10px !important;
+    }
+
+    .mpesa-checkout-card input {
+        width: 100% !important;
+    }
+    
+    .cart-page table img {
+        width: 60px;
+        height: 60px;
     }
 }
