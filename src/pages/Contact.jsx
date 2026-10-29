@@ -28,11 +28,15 @@ const Contact = () => {
                         display: 'flex',
                     }}>
                         <img 
-                            src="/assets/contact.jpg" 
+                            src="/assets/contact-image.png" 
                             alt="Contact Us" 
                             style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                             onError={(e) => e.target.src = "https://via.placeholder.com/500x400?text=Contact+Us"}
                         />
+                    </div>
+                    {/* Attribution Caption */}
+                    <div style={{ marginTop: '8px', paddingLeft: '5px', fontSize: '12px', color: '#888' }}>
+                        Photo by <a href="https://unsplash.com/@shutterspeed" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--primary-color, #ff523b)', textDecoration: 'none' }}>Shutter Speed</a> on <a href="https://unsplash.com" target="_blank" rel="noopener noreferrer" style={{ color: '#888', textDecoration: 'underline' }}>Unsplash</a>
                     </div>
                 </div>
                 {/*Form and information */}
