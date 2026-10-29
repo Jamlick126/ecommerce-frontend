@@ -935,20 +935,65 @@ select,
 
 /* --- Small Mobile Phones (480px and below) --- */
 @media only screen and (max-width: 480px) {
+    /* 1. Prevent Navbar Header Elements from Forcing Minimum Widths */
+    .navbar-content {
+        padding: 10px 15px !important;
+    }
+
+    .logo {
+        flex: 0 1 auto !important;
+        max-width: 130px;
+    }
+
+    .logo img {
+        width: 100px !important;
+    }
+
+    .header-icons {
+        flex: 0 1 auto !important;
+        gap: 10px !important;
+    }
+
+    /* 2. Remove Minimum Width Constraints on Grid Columns & Containers */
+    .container, 
+    .small-container {
+        padding-left: 12px !important;
+        padding-right: 12px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        overflow-x: hidden;
+    }
+
+    .col-2, .col-3, .col-4, .col-5 {
+        flex-basis: 100% !important;
+        width: 100% !important;
+        min-width: 0 !important; /* Overrides the desktop min-width: 300px */
+        box-sizing: border-box !important;
+    }
+
+    /* 3. Hero Image & Text Scaling */
+    .col-2 img {
+        width: 100% !important;
+        height: auto !important;
+        padding: 20px 0 !important;
+    }
+
     .col-2 h1 {
-        font-size: 36px;
-        line-height: 40px;
-        margin: 15px 0;
+        font-size: 28px !important;
+        line-height: 36px !important;
+        margin: 15px 0 !important;
     }
 
     h2 {
         font-size: 24px;
     }
 
-    /* Tighten container padding for narrow screens */
-    .container, .small-container {
-        padding-left: 10px;
-        padding-right: 10px;
+    /* 4. Global Viewport Overflow Guard */
+    html, body, #root {
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow-x: hidden !important;
     }
 
     /* Prevent buttons and checkout inputs from clipping */
