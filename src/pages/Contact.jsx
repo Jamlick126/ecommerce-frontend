@@ -28,7 +28,7 @@ const Contact = () => {
                         display: 'flex',
                     }}>
                         <img 
-                            src="/assets/contact-image.png" 
+                            src="/assets/contact-img.png" 
                             alt="Contact Us" 
                             style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                             onError={(e) => e.target.src = "https://via.placeholder.com/500x400?text=Contact+Us"}
