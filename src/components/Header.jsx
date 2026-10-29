@@ -53,9 +53,9 @@ const Header = () => {
                 </div>
                 <nav>
                     <ul id="MenuItems" style={{maxHeight: isMenuOpen ? "300px" : "0px"}}>
-                        <li><NavLink to="/" className={navLinkStyles} onClick={closeMenu}>Home</NavLink></li>
-                        <li><NavLink to="/products" className={navLinkStyles} onClick={closeMenu}>Products</NavLink></li>
-                        <li><NavLink to="/contact" className={navLinkStyles} onClick={closeMenu}>Contact</NavLink></li>
+                        <li><NavLink to="/" className={navLinkStyles} end onClick={closeMenu}>Home</NavLink></li>
+                        <li><NavLink to="/products" className={navLinkStyles} end onClick={closeMenu}>Products</NavLink></li>
+                        <li><NavLink to="/contact" className={navLinkStyles} end onClick={closeMenu}>Contact</NavLink></li>
                         {/* Dynamic Link: Show Logout if logged in, else show Account */}
                         {isLoggedIn ? (
                             <>
