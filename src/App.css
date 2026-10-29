@@ -893,28 +893,56 @@ select,
         position: absolute;
         top: 70px;
         right: 0;
-        background: #333;
-        width: 180px;
+        background: #242424;
+        width: 220px;
         overflow: hidden;
+        border-radius: 0 0 0 10px;
         transition: max-height 0.5s ease-in-out;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.5);
         z-index: 2;
         display: flex;
         flex-direction: column;
+        border-left: 1px solid #333;
+        border-bottom: 1px solid #333;
     }
     
     nav ul li {
         text-align: left;
         display: block;
+        width: 100%;
+        margin: 0;
+        border-bottom: 1px solid rgba(255, 82, 59, 0.05);
     }
+    nav ul li:last-child {
+            border-bottom: none;
+        }
     
-    nav ul li a {
+    
+    nav ul li a,
+    nav ul li .nav-logout-btn {
         color: #fff;
         display: block;
-        padding: 10px 15px;
+        padding: 14px 20px;
         text-decoration: none;
-        font-size: 14px;
-        transition: background 0.3s ease;
+        font-size: 15px;
+        letter-spacing: 1px;
+        transition: background 0.3s ease, color 0.3s ease;
+        width: 100%;
+        text-align: left;
+    }
+
+    nav ul li a:hover,
+    nav ul li .nav-logout-btn:hover {
+        background: rgba(255, 82, 59, 0.15); /* Subtle primary color tint on hover */
+        color: var(--primary-color);
+    }
+
+    /* Highlight active link nicely in mobile view */
+    nav ul li a.active-link {
+        background: rgba(255, 82, 59, 0.2);
+        border-bottom: none;
+        border-left: 4px solid var(--primary-color);
+        padding-left: 16px; /* Offset for the left border */
     }
 
     .menu-icon {
@@ -1023,5 +1051,62 @@ select,
     .cart-page table img {
         width: 60px;
         height: 60px;
+    }
+}
+
+/* --- Micro-Mobile Devices (320px and below) --- */
+@media only screen and (max-width: 320px) {
+    /* 1. Ultra-tight container margins */
+    .container, 
+    .small-container {
+        padding-left: 8px !important;
+        padding-right: 8px !important;
+    }
+
+    /* 2. Scale down Navbar elements to prevent wrapping */
+    .navbar-content {
+        padding: 8px 10px !important;
+    }
+
+    .logo img {
+        width: 85px !important;
+    }
+
+    .menu-icon {
+        width: 24px !important;
+    }
+
+    /* 3. Scale down Hero Typography so text doesn't overflow */
+    .col-2 h1 {
+        font-size: 22px !important;
+        line-height: 28px !important;
+        margin: 10px 0 !important;
+    }
+
+    p {
+        font-size: 13px !important;
+        line-height: 1.4 !important;
+    }
+
+    /* 4. Compact Buttons */
+    .btn {
+        padding: 8px 14px !important;
+        font-size: 13px !important;
+        margin: 10px 0 !important;
+        border-radius: 20px !important;
+    }
+
+    /* 5. Cart and Account Form Adjustments */
+    .cart-page h2 {
+        font-size: 20px !important;
+    }
+
+    td img {
+        width: 50px !important;
+        height: 50px !important;
+    }
+
+    .form-container {
+        padding: 15px 10px !important;
     }
 }
