@@ -22,6 +22,18 @@ const Header = () => {
         }
     }, [isLoggedIn, updateCartCount]);
 
+    // iii) Close dropdown menu automatically on window scroll
+    useEffect(() => {
+        const handleScroll = () => {
+            if (isMenuOpen) {
+                setIsMenuOpen(false);
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, [isMenuOpen]);
+
     const handleLogout = () => {
         localStorage.removeItem("token");
         localStorage.removeItem("username");
@@ -66,7 +78,7 @@ const Header = () => {
                                    </li>
                             </>
                         ) : (
-                            <li><NavLink to="/account" className={navLinkStyles} onClick={closeMenu}>Account</NavLink></li>
+                            <li><NavLink to="/account" className={navLinkStyles} end onClick={closeMenu}>Account</NavLink></li>
                         )}
                         
                     </ul>
