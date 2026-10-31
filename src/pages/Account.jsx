@@ -110,98 +110,106 @@ const Account = () => {
                             width: '100%',
                             maxWidth: '500px',
                             height: 'auto',
-                            overflow: 'visible',
+                            overflow: 'hidden',
                             position: 'relative',
                             margin: '0 auto',
                             boxSizing: 'border-box'
                         }}>
                         <div
-                            style={{ textAlign: 'center', marginBottom: '20px' }}>
-                            <span 
-                                onClick={() => setFormType('login')} 
-                                style={{ color: formType === 'login' ? 'var(--primary-color, #ff523b)' : '#aaa', cursor: 'pointer', fontWeight: 'bold', padding: '0 10px', display: 'inline-block' }}>
-                                    Login
-                            </span>
-                            <span 
-                                onClick={() => setFormType('register')} 
-                                style={{ color: formType === 'register' ? 'var(--primary-color, #ff523b)' : '#aaa', cursor: 'pointer', fontWeight: 'bold', padding: '0 10px', display: 'inline-block' }}>
-                                Register
-                            </span>
-                            <div style={{ 
-                                width: '100px', 
-                                background: 'var(--primary-color, #ff523b)', 
-                                height: '3px', 
-                                marginTop: '8px auto 0 auto', 
-                                transform: formType === 'login' ? 'translateX(-50px)' : 'translateX(50px)',
-                                transition: 'transform 0.5s ease' }} />
+                            style={{ textAlign: 'center', marginBottom: '25px', position: 'relative' }}>
+                                <div style={{ display: 'inline-block', position: 'relative' }}>
+                                    <span 
+                                        onClick={() => setFormType('login')} 
+                                        style={{ 
+                                            color: formType === 'login' ? 'var(--primary-color, #ff523b)' : '#aaa',
+                                            cursor: 'pointer', 
+                                            fontWeight: 'bold', 
+                                            padding: '0 15px 8px 15px', 
+                                            display: 'inline-block',
+                                            transition: 'color 0.3s ease'}}>
+                                            Login
+                                    </span>
+                                
+                                    <span 
+                                        onClick={() => setFormType('register')} 
+                                        style={{ 
+                                            color: formType === 'register' ? 'var(--primary-color, #ff523b)' : '#aaa', 
+                                            cursor: 'pointer', 
+                                            fontWeight: 'bold', 
+                                            padding: '0 15px 8px 15px', 
+                                            display: 'inline-block',
+                                            transition: 'color 0.3s ease'
+                                        }}>
+                                        Register
+                                    </span>
+                                
+                                <div style={{ 
+                                    position: 'absolute',
+                                    bottom: '0',
+                                    left: formType === 'login' ? '10px' : '95px',
+                                    width: '65px', 
+                                    background: 'var(--primary-color, #ff523b)', 
+                                    height: '3px',
+                                    borderRadius: '2px',
+                                    transition: 'left 0.3s ease-in-out' }}
+                                />
+                            </div>
                         </div>
-                        <div style={{
-                            display: 'flex',
-                            width: '200%',
-                            transform: formType === 'login' ? 'translateX(0%)' : 'translateX(-50%)',
-                            transition: 'transform 0.5s ease-in-out'
-                        }}>
-                             {/* Login Form */}
-                        <form 
-                            onSubmit={handleLogin}
-                            id="LoginForm" 
-                            style={{width: '50%', paddingRight: '15px', boxSizing: 'border-box'}}>
+
+                             {/* Conditional Form Rendering (No SLide Overflow) */}
+                        {formType === 'login' ? (
+                            <form onSubmit={handleLogin} id="LoginForm" >
                             
-                            <input 
-                                type="email" 
-                                placeholder="Email Address" 
-                                value={email} 
-                                required 
-                                onChange={(e) => setEmail(e.target.value)}
-                                style={inputStyle}
-                            />
-                            <input 
-                                type="password" 
-                                placeholder="Password"  
-                                value={password} 
-                                required 
-                                onChange={(e) => setPassword(e.target.value)}
-                                style={inputStyle}
-                            />
-                            <button type="submit" className="btn" style={{ width: '100%', margin: '15px 0'}}>Login</button>
-                            <a href="#forgot" style={{ color: '#aaa', fontSize: '12px', textDecoration: 'none' }}>Forgot password</a>
-                        </form>
-
-                        {/* Register Form */}
-                        <form 
-                            onSubmit={handleRegister}
-                            id="RegForm" 
-                            style={{ width: '50%', paddingLeft: '15px', boxSizing: 'border-box' }}>
-
-                            <input 
-                                type="text" 
-                                placeholder="Username" 
-                                value={username} 
-                                required 
-                                onChange={(e) => setUsername(e.target.value)}
-                                style={inputStyle}
-                            />
-                            <input 
-                                type="email" 
-                                placeholder="Email Address" 
-                                required 
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                style={inputStyle}
-                            />
-                            <input 
-                                type="password" 
-                                placeholder="Password" 
-                                required 
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                style={inputStyle}
-                            />
-                            <button type="submit" className="btn" style={{ width: '100%', margin: '15px 0' }}>Register</button>
-                        </form>
-                        </div>  
-                    </div>
-                </div>
+                                <input 
+                                    type="email" 
+                                    placeholder="Email Address" 
+                                    value={email} 
+                                    required 
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    style={inputStyle}
+                                />
+                                <input 
+                                    type="password" 
+                                    placeholder="Password"  
+                                    value={password} 
+                                    required 
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    style={inputStyle}
+                                />
+                                <button type="submit" className="btn" style={{ width: '100%', margin: '15px 0'}}>Login</button>
+                                <a href="#forgot" style={{ color: '#aaa', fontSize: '12px', textDecoration: 'none' }}>Forgot password</a>
+                            </form>
+                        ) : (
+                            <form onSubmit={handleRegister} id="RegForm">
+                                <input 
+                                    type="text" 
+                                    placeholder="Username" 
+                                    value={username} 
+                                    required 
+                                    onChange={(e) => setUsername(e.target.value)}
+                                    style={inputStyle}
+                                />
+                                <input 
+                                    type="email" 
+                                    placeholder="Email Address" 
+                                    required 
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    style={inputStyle}
+                                />
+                                <input 
+                                    type="password" 
+                                    placeholder="Password" 
+                                    required 
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    style={inputStyle}
+                                />
+                                <button type="submit" className="btn" style={{ width: '100%', margin: '15px 0' }}>Register</button>
+                            </form>
+                        )} 
+                    </div>       
+                </div>  
             </div>
         </div>
     </div>
