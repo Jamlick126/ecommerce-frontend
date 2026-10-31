@@ -7,11 +7,6 @@ const Account = () => {
     // login or register
   const [formType, setFormType] = useState('login');
 
-    // Translation values
-  const loginTransform = formType === 'login' ? "translateX(300px)" : "translateX(0px)";
-  const registerTransform = formType === 'login' ? "translateX(300px)" : "translateX(0px)";
-  const indicatorTransform = formType === 'login' ? "translateX(0px)" : "translateX(100px)";
-
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -23,21 +18,20 @@ const Account = () => {
 
   const handleRegister = async (e) => {
     e.preventDefault();
-
     const userData = { username, email, password };
     try {
         const response = await apiFetch('/api/register', {
             method:"POST",
             headers: { 
                 'Content-Type': 'application/json',
-                'x-store-slug': storeSlug },// Send the store slug in the headers
+                'x-store-slug': storeSlug 
+            },// Send the store slug in the headers
             body: JSON.stringify(userData),
         });
         const data = await response.json();
 
         if (response.ok) {
         alert("Registration Successful!");
-        // Clear form
         setUsername('');
         setEmail('');
         setPassword('');
@@ -86,7 +80,7 @@ const Account = () => {
   return (
     <div className="account-page">
         <div className="container">
-            <div className="row" style={{ alignItems: 'stretch'}}>
+            <div className="row" style={{ alignItems: 'stretch' }}>
                 <div className="col-2" style={{ display: 'flex', flexDirection: 'column' }}>
                     <div style={{
                         width: '100%',
@@ -95,6 +89,7 @@ const Account = () => {
                         overflow: 'hidden',
                         boxShadow: '0 4px 15px rgba(0, 0, 0, 0.3)',
                         display: 'flex',
+                        minHeight:'350px'
                     }}>
                         <img 
                             src="/assets/image1.png" 
@@ -117,18 +112,28 @@ const Account = () => {
                             height: 'auto',
                             overflow: 'hidden',
                             position: 'relative',
-                            margin: '0 auto'
+                            margin: '0 auto',
+                            boxSizing: 'border-box'
                         }}>
-                        <div className="form-btn"style={{ textAlign: 'center', marginBottom: '20px' }}>
-                            <span onClick={() => setFormType('login')} style={{ color: formType === 'login' ? 'var(--primary-color, #ff523b)' : '#aaa' }}>Login</span>
-                            <span onClick={() => setFormType('register')} style={{ color: formType === 'register' ? 'var(--primary-color, #ff523b)' : '#aaa' }}>Register</span>
-                            <hr id="Indicator" style={{ 
+                        <div 
+                            className="form-btn"
+                            style={{ textAlign: 'center', marginBottom: '20px' }}>
+                            <span 
+                                onClick={() => setFormType('login')} 
+                                style={{ color: formType === 'login' ? 'var(--primary-color, #ff523b)' : '#aaa', cursor: 'pointer', fontWeight: 'bold', padding: '0 10px', display: 'inline-block' }}>
+                                    Login
+                            </span>
+                            <span 
+                                onClick={() => setFormType('register')} 
+                                style={{ color: formType === 'register' ? 'var(--primary-color, #ff523b)' : '#aaa', cursor: 'pointer', fontWeight: 'bold', padding: '0 10px', display: 'inline-block' }}>
+                                Register
+                            </span>
+                            <div id="Indicator" style={{ 
                                 width: '100px', 
-                                border: 'none', 
                                 background: 'var(--primary-color, #ff523b)', 
                                 height: '3px', 
-                                marginTop: '8px', 
-                                transform: formType === 'login' ? 'translateX(0px)' : 'translateX(100px)',
+                                marginTop: '8px auto 0 auto', 
+                                transform: formType === 'login' ? 'translateX(-50px)' : 'translateX(50px)',
                                 transition: 'transform 0.5s ease' }} />
                         </div>
                         <div className="forms-slider" style={{
@@ -141,11 +146,11 @@ const Account = () => {
                         <form 
                             onSubmit={handleLogin}
                             id="LoginForm" 
-                            style={{width: '50%', paddingRight: '15px'}}>
+                            style={{width: '50%', paddingRight: '15px', boxSizing: 'border-box'}}>
                             
                             <input 
                                 type="email" 
-                                placeholder="Email" 
+                                placeholder="Email Address" 
                                 value={email} 
                                 required 
                                 onChange={(e) => setEmail(e.target.value)}
@@ -159,7 +164,7 @@ const Account = () => {
                                 onChange={(e) => setPassword(e.target.value)}
                                 style={inputStyle}
                             />
-                            <button type="submit" className="btn" style={{ width: '100%'}}>Login</button>
+                            <button type="submit" className="btn" style={{ width: '100%', margin: '15px 0'}}>Login</button>
                             <a href="#forgot" style={{ color: '#aaa', fontSize: '12px', textDecoration: 'none' }}>Forgot password</a>
                         </form>
 
@@ -167,7 +172,7 @@ const Account = () => {
                         <form 
                             onSubmit={handleRegister}
                             id="RegForm" 
-                            style={{ width: '50%', paddingLeft: '15px' }}>
+                            style={{ width: '50%', paddingLeft: '15px', boxSizing: 'border-box' }}>
 
                             <input 
                                 type="text" 
@@ -179,7 +184,7 @@ const Account = () => {
                             />
                             <input 
                                 type="email" 
-                                placeholder="Email" 
+                                placeholder="Email Address" 
                                 required 
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
@@ -193,7 +198,7 @@ const Account = () => {
                                 onChange={(e) => setPassword(e.target.value)}
                                 style={inputStyle}
                             />
-                            <button type="submit" className="btn" style={{ width: '100%' }}>Register</button>
+                            <button type="submit" className="btn" style={{ width: '100%', margin: '15px 0' }}>Register</button>
                         </form>
                         </div>  
                     </div>
@@ -212,7 +217,8 @@ const inputStyle = {
     background: '#1a1a1a',
     color: '#fff',
     borderRadius: '5px',
-    outline: 'none'
+    outline: 'none',
+    boxSizing: 'border-box'
 };
 
 export default Account;
