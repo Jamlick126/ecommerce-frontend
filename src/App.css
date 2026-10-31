@@ -782,6 +782,17 @@ form a {
     transform: translateX(100px);
     transition: transform 1s;
 }
+/* --- Account Form Slider Fixes --- */
+.forms-slider {
+    display: flex;
+    width: 200%;
+    transition: transform 0.5s ease-in-out;
+}
+
+.forms-slider form {
+    width: 50%;
+    flex-shrink: 0;
+}
  /* -------Contact Page------- */
 .contact-page .row {
     display: flex;
@@ -878,9 +889,10 @@ select,
 
     /* Ensure account page form wrapper scales cleanly */
     .account-page .form-container {
-        height: auto;
-        min-height: 400px;
-        padding-bottom: 30px;
+       width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        padding: 25px !important;
     }
 
     .account-page .form-container form {

@@ -86,51 +86,133 @@ const Account = () => {
   return (
     <div className="account-page">
         <div className="container">
-            <div className="row">
-                <div className="col-2">
-                    <img src="/assets/image1.png" width="100%" alt="Featured" />
+            <div className="row" style={{ alignItems: 'stretch'}}>
+                <div className="col-2" style={{ display: 'flex', flexDirection: 'column' }}>
+                    <div style={{
+                        width: '100%',
+                        flex: '1',
+                        borderRadius: '10px',
+                        overflow: 'hidden',
+                        boxShadow: '0 4px 15px rgba(0, 0, 0, 0.3)',
+                        display: 'flex',
+                    }}>
+                        <img 
+                            src="/assets/image1.png" 
+                            alt="Featured"
+                            style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                        />
+                    </div>
+                    
                 </div>
                 <div className="col-2">
-                    <div className="form-container">
-                        <div className="form-btn">
-                            <span onClick={() => setFormType('login')}>Login</span>
-                            <span onClick={() => setFormType('register')}>Register</span>
-                            <hr id="Indicator" style={{ transform: indicatorTransform }} />
+                    <div className="form-container contact-form-container"
+                        style={{
+                            textAlign: 'left', 
+                            background: '#2c2c2c', 
+                            padding: '30px', 
+                            borderRadius: '10px',
+                            boxShadow: '0 4px 15px rgba(0, 0, 0, 0.3)',
+                            width: '100%',
+                            maxWidth: '500px',
+                            height: 'auto',
+                            overflow: 'hidden',
+                            position: 'relative',
+                            margin: '0 auto'
+                        }}>
+                        <div className="form-btn"style={{ textAlign: 'center', marginBottom: '20px' }}>
+                            <span onClick={() => setFormType('login')} style={{ color: formType === 'login' ? 'var(--primary-color, #ff523b)' : '#aaa' }}>Login</span>
+                            <span onClick={() => setFormType('register')} style={{ color: formType === 'register' ? 'var(--primary-color, #ff523b)' : '#aaa' }}>Register</span>
+                            <hr id="Indicator" style={{ 
+                                width: '100px', 
+                                border: 'none', 
+                                background: 'var(--primary-color, #ff523b)', 
+                                height: '3px', 
+                                marginTop: '8px', 
+                                transform: formType === 'login' ? 'translateX(0px)' : 'translateX(100px)',
+                                transition: 'transform 0.5s ease' }} />
                         </div>
-                        {/* Login Form */}
+                        <div className="forms-slider" style={{
+                            display: 'flex',
+                            width: '200%',
+                            transform: formType === 'login' ? 'translateX(0%)' : 'translateX(-50%)',
+                            transition: 'transform 0.5s ease-in-out'
+                        }}>
+                             {/* Login Form */}
                         <form 
                             onSubmit={handleLogin}
                             id="LoginForm" 
-                            style={{ transform: loginTransform }}
-                        >
-                            <input type="email" placeholder="Email" value={email} required 
-                                onChange={(e) => setEmail(e.target.value)}/>
-                            <input type="password" placeholder="Password"  value={password} required 
-                                onChange={(e) => setPassword(e.target.value)}/>
-                            <button type="submit" className="btn">Login</button>
-                            <a href="">Forgot password</a>
+                            style={{width: '50%', paddingRight: '15px'}}>
+                            
+                            <input 
+                                type="email" 
+                                placeholder="Email" 
+                                value={email} 
+                                required 
+                                onChange={(e) => setEmail(e.target.value)}
+                                style={inputStyle}
+                            />
+                            <input 
+                                type="password" 
+                                placeholder="Password"  
+                                value={password} 
+                                required 
+                                onChange={(e) => setPassword(e.target.value)}
+                                style={inputStyle}
+                            />
+                            <button type="submit" className="btn" style={{ width: '100%'}}>Login</button>
+                            <a href="#forgot" style={{ color: '#aaa', fontSize: '12px', textDecoration: 'none' }}>Forgot password</a>
                         </form>
 
                         {/* Register Form */}
                         <form 
                             onSubmit={handleRegister}
                             id="RegForm" 
-                            style={{ transform: registerTransform }}
-                        >
-                            <input type="text" placeholder="Username" value={username} required 
-                                onChange={(e) => setUsername(e.target.value)}/>
-                            <input type="email" placeholder="Email" required value={email}
-                                onChange={(e) => setEmail(e.target.value)}/>
-                            <input type="password" placeholder="Password" required value={password}
-                                onChange={(e) => setPassword(e.target.value)}/>
-                            <button type="submit" className="btn">Register</button>
+                            style={{ width: '50%', paddingLeft: '15px' }}>
+
+                            <input 
+                                type="text" 
+                                placeholder="Username" 
+                                value={username} 
+                                required 
+                                onChange={(e) => setUsername(e.target.value)}
+                                style={inputStyle}
+                            />
+                            <input 
+                                type="email" 
+                                placeholder="Email" 
+                                required 
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                style={inputStyle}
+                            />
+                            <input 
+                                type="password" 
+                                placeholder="Password" 
+                                required 
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                style={inputStyle}
+                            />
+                            <button type="submit" className="btn" style={{ width: '100%' }}>Register</button>
                         </form>
+                        </div>  
                     </div>
                 </div>
             </div>
         </div>
     </div>
   );
+};
+
+const inputStyle = {
+    width: '100%',
+    padding: '12px',
+    margin: '10px 0',
+    border: '1px solid #444',
+    background: '#1a1a1a',
+    color: '#fff',
+    borderRadius: '5px',
+    outline: 'none'
 };
 
 export default Account;
