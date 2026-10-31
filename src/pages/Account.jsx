@@ -100,7 +100,7 @@ const Account = () => {
                     
                 </div>
                 <div className="col-2">
-                    <div className="form-container contact-form-container"
+                    <div
                         style={{
                             textAlign: 'left', 
                             background: '#2c2c2c', 
@@ -110,13 +110,12 @@ const Account = () => {
                             width: '100%',
                             maxWidth: '500px',
                             height: 'auto',
-                            overflow: 'hidden',
+                            overflow: 'visible',
                             position: 'relative',
                             margin: '0 auto',
                             boxSizing: 'border-box'
                         }}>
-                        <div 
-                            className="form-btn"
+                        <div
                             style={{ textAlign: 'center', marginBottom: '20px' }}>
                             <span 
                                 onClick={() => setFormType('login')} 
@@ -128,7 +127,7 @@ const Account = () => {
                                 style={{ color: formType === 'register' ? 'var(--primary-color, #ff523b)' : '#aaa', cursor: 'pointer', fontWeight: 'bold', padding: '0 10px', display: 'inline-block' }}>
                                 Register
                             </span>
-                            <div id="Indicator" style={{ 
+                            <div style={{ 
                                 width: '100px', 
                                 background: 'var(--primary-color, #ff523b)', 
                                 height: '3px', 
@@ -136,7 +135,7 @@ const Account = () => {
                                 transform: formType === 'login' ? 'translateX(-50px)' : 'translateX(50px)',
                                 transition: 'transform 0.5s ease' }} />
                         </div>
-                        <div className="forms-slider" style={{
+                        <div style={{
                             display: 'flex',
                             width: '200%',
                             transform: formType === 'login' ? 'translateX(0%)' : 'translateX(-50%)',
