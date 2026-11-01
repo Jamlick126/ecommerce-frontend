@@ -110,6 +110,7 @@ const Account = () => {
                             width: '100%',
                             maxWidth: '500px',
                             height: 'auto',
+                            minHeight: '350px',
                             overflow: 'hidden',
                             position: 'relative',
                             margin: '0 auto',
