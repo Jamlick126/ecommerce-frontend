@@ -704,8 +704,20 @@ th:last-child {
 
 .account-page {
     min-height: calc(100vh - 70px);
-    padding: 50px 0px;
+    padding: 60px 0px;
     background: var(--accent-gradient); 
+    display: flex;
+    align-items: center;
+}
+.account-page .container {
+    width: 100%;
+}
+
+.account-page .row {
+    display: flex;
+    align-items: center !important; /* Forces both the image column and form column to center vertically together */
+    justify-content: space-around;
+    flex-wrap: wrap;
 }
 
 .form-container {
