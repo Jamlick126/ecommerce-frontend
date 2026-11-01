@@ -1146,6 +1146,30 @@ select,
     }
 }
 
+/* --- Account Page Intermediate Tablet Layout (721px to 992px) --- */
+@media only screen and (min-width: 721px) and (max-width: 992px) {
+    .account-page .row {
+        display: flex;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: stretch !important;
+        gap: 20px !important; /* Creates clean margin/padding space between image and form */
+    }
+
+    .account-page .col-2 {
+        flex-basis: calc(50% - 10px) !important;
+        width: calc(50% - 10px) !important;
+        min-width: 0 !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Scale down form padding slightly so it fits proportionally */
+    .account-page .form-container,
+    .contact-page .form-container {
+        padding: 20px !important;
+        max-width: 100% !important;
+    }
+}
 /* ii) Two Columns: From 620px up to 820px */
 @media only screen and (min-width: 722px) and (max-width: 1128px) {
     .footer .row {
