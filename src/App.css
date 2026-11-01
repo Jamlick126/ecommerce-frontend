@@ -1132,7 +1132,7 @@ select,
 /* --- Footer Responsive Layout Breakpoints --- */
 
 /* i) One Column: Below 620px */
-@media only screen and (max-width: 620px) {
+@media only screen and (max-width: 659px) {
     .footer .footer-col-1, 
     .footer .footer-col-2, 
     .footer .footer-col-3, 
@@ -1145,7 +1145,7 @@ select,
 }
 
 /* ii) Two Columns: From 620px up to 820px */
-@media only screen and (min-width: 621px) and (max-width: 820px) {
+@media only screen and (min-width: 660px) and (max-width: 820px) {
     .footer .footer-col-1, 
     .footer .footer-col-2, 
     .footer .footer-col-3, 
