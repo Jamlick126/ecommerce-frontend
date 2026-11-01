@@ -862,7 +862,7 @@ select,
     }
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 720px) {
     .container, .small-container {
         padding-left: 15px;
         padding-right: 15px;
@@ -1132,7 +1132,7 @@ select,
 /* --- Footer Responsive Layout Breakpoints --- */
 
 /* i) One Column: Below 620px */
-@media only screen and (max-width: 720px) {
+@media only screen and (max-width: 721px) {
     .footer .footer-col-1, 
     .footer .footer-col-2, 
     .footer .footer-col-3, 
@@ -1147,7 +1147,7 @@ select,
 }
 
 /* ii) Two Columns: From 620px up to 820px */
-@media only screen and (min-width: 721px) and (max-width: 1128px) {
+@media only screen and (min-width: 722px) and (max-width: 1128px) {
     .footer .row {
         display: flex;
         flex-wrap: wrap;
@@ -1188,7 +1188,7 @@ select,
     }
 
     /* Fine-tune internal padding and image scaling inside columns */
-    .footer.footer-col-2 img {
+    .footer .footer-col-2 img {
         width: 150px !important;
         margin-bottom: 15px !important;
     }
