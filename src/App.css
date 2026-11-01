@@ -1142,11 +1142,12 @@ select,
         min-width: 0 !important;
         text-align: center !important;
         padding: 0 20px 30px 20px !important;
+        order: unset !important; /* Reset order for mobile stacking */
     }
 }
 
 /* ii) Two Columns: From 620px up to 820px */
-@media only screen and (min-width: 721px) and (max-width: 1080px) {
+@media only screen and (min-width: 721px) and (max-width: 1128px) {
     .footer .row {
         display: flex;
         flex-wrap: wrap;
@@ -1187,7 +1188,7 @@ select,
     }
 
     /* Fine-tune internal padding and image scaling inside columns */
-    .footer-col-2 img {
+    .footer.footer-col-2 img {
         width: 150px !important;
         margin-bottom: 15px !important;
     }
