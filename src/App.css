@@ -1147,7 +1147,7 @@ select,
 }
 
 /* --- Account Page Intermediate Tablet Layout (721px to 992px) --- */
-@media only screen and (min-width: 721px) and (max-width: 992px) {
+@media only screen and (min-width: 721px) and (max-width: 1128px) {
     .account-page .row {
         display: flex;
         flex-direction: row !important;
