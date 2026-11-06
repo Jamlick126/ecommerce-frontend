@@ -77,6 +77,7 @@ export default function AdminDashboard() {
                         <th style={{ padding: '10px', borderBottom: '1px solid #ddd' }}>Amount</th>
                         <th style={{ padding: '10px', borderBottom: '1px solid #ddd' }}>Status</th>
                         <th style={{ padding: '10px', borderBottom: '1px solid #ddd' }}>M-Pesa Receipt</th>
+                        <th style={{ padding: '10px', borderBottom: '1px solid #ddd' }}>Actions</th>
                     </tr>
                 </thead>
                 <tbody>

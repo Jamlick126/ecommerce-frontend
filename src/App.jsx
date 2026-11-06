@@ -10,6 +10,7 @@ import Cart from './components/Cart';
 import Contact from './pages/Contact';
 import ThankYou from './components/ThankYou';
 import Footer from './components/Footer';
+import AdminDashboard from './components/AdminDashboard';
 import './App.css'
 
 
@@ -34,6 +35,11 @@ function App() {
                 element={
                 <ProtectedRoute>
                   <ThankYou />
+                </ProtectedRoute>}/>
+        <Route path="/admin"
+                element={
+                <ProtectedRoute>
+                  <AdminDashboard />
                 </ProtectedRoute>}/>
       </Routes>
       <Footer/>
