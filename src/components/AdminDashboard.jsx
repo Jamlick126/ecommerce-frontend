@@ -7,7 +7,7 @@ export default function AdminDashboard() {
 
     const fetchOrders = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/api/admin/orders', {
+            const response = await axios.get('https://ecommerce-backend-hm0b.onrender.com/api/admin/orders', {
                 headers: { 
                     'Authorization': `Bearer ${localStorage.getItem('token')}`,
                     'x-store-slug': 'default-store' 
@@ -27,7 +27,7 @@ export default function AdminDashboard() {
 
     const handleStatusUpdate = async (orderId, newStatus) => {
         try {
-            await axios.put(`http://localhost:5000/api/admin/orders/${orderId}/status`, 
+            await axios.put(`https://ecommerce-backend-hm0b.onrender.com/api/admin/orders/${orderId}/status`, 
                 { status: newStatus },
                 { 
                     headers: { 
