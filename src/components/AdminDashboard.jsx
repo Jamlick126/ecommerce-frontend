@@ -99,7 +99,8 @@ export default function AdminDashboard() {
                             <td style={{ padding: '10px', borderBottom: '1px solid #ddd' }}>{order.mpesa_receipt || 'N/A'}</td>
                             {/* <-- ADD QUICK ACTION BUTTONS --> */}
                             <td style={{ padding: '10px', borderBottom: '1px solid #ddd' }}>
-                                {order.status !== 'paid' && (
+                                {/* Show Mark Paid ONLY when pending */}
+                                {order.status === 'pending' && (
                                     <button 
                                         onClick={() => handleStatusUpdate(order.id, 'paid')}
                                         style={{ marginRight: '5px', background: 'green', color: '#fff', border: 'none', padding: '5px 10px', cursor: 'pointer', borderRadius: '4px' }}
@@ -107,7 +108,16 @@ export default function AdminDashboard() {
                                         Mark Paid
                                     </button>
                                 )}
-                                {order.status !== 'failed' && (
+                                {/* Show Mark Delivered when paid */}
+                                {order.status === 'paid' && (
+                                    <button 
+                                        onClick={() => handleStatusUpdate(order.id, 'delivered')}
+                                        style={{ marginRight: '5px', background: 'green', color: '#fff', border: 'none', padding: '5px 10px', cursor: 'pointer', borderRadius: '4px' }}
+                                    >
+                                        Mark Delivered
+                                    </button>
+                                )}
+                                {order.status !== 'failed' && order.status !== 'delivered' && (
                                     <button 
                                         onClick={() => handleStatusUpdate(order.id, 'failed')}
                                         style={{ background: 'red', color: '#fff', border: 'none', padding: '5px 10px', cursor: 'pointer', borderRadius: '4px' }}
